@@ -27,7 +27,7 @@ package object cats extends DecoderInstances with CommonInstances {
   implicit val xpathCompileErrorEq: Eq[CompileError]          = Eq.fromUniversalEquals
   implicit val xpathReadErrorEq: Eq[ReadError]                = Eq.fromUniversalEquals
   implicit val xpathDecodeErrorEq: Eq[DecodeError]            = Eq.fromUniversalEquals
-  implicit val xpathNotFoundEq: Eq[DecodeError.NotFound.type] = Eq.fromUniversalEquals
+  implicit val xpathNotFoundEq: Eq[DecodeError.NotFound] = Eq.fromUniversalEquals
   implicit val xpathTypeErrorEq: Eq[DecodeError.TypeError]    = Eq.fromUniversalEquals
   implicit val xpathParseErrorEq: Eq[ParseError]              = Eq.fromUniversalEquals
   implicit val xpathSyntaxErrorEq: Eq[ParseError.SyntaxError] = Eq.fromUniversalEquals

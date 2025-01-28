@@ -28,7 +28,7 @@ class ErrorTests extends ScalazDisciplineSuite {
   checkAll("CompileError", equ.laws[CompileError])
   checkAll("ReadError", equ.laws[ReadError])
   checkAll("DecodeError", equ.laws[DecodeError])
-  checkAll("DecodeError.NotFound", equ.laws[DecodeError.NotFound.type])
+  checkAll("DecodeError.NotFound", equ.laws[DecodeError.NotFound])
   checkAll("DecodeError.TypeError", equ.laws[DecodeError.TypeError])
   checkAll("ParseError", equ.laws[ParseError])
   checkAll("ParseError.SyntaxError", equ.laws[ParseError.SyntaxError])
@@ -51,10 +51,10 @@ class ErrorTests extends ScalazDisciplineSuite {
   }
 
   test("Show[DecodeError.NotFound] should yield a string containing the expected message") {
-    forAll { error: DecodeError.NotFound.type =>
+    forAll { error: DecodeError.NotFound =>
       val expected = "no matched node"
 
-      Show[DecodeError.NotFound.type].shows(error) should include(expected)
+      Show[DecodeError.NotFound].shows(error) should include(expected)
       Show[DecodeError].shows(error) should include(expected)
       Show[ReadError].shows(error) should include(expected)
       Show[XPathError].shows(error) should include(expected)

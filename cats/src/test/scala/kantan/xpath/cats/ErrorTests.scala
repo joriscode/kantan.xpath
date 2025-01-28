@@ -28,7 +28,7 @@ class ErrorTests extends DisciplineSuite {
   checkAll("CompileError", EqTests[CompileError].eqv)
   checkAll("ReadError", EqTests[ReadError].eqv)
   checkAll("DecodeError", EqTests[DecodeError].eqv)
-  checkAll("DecodeError.NotFound", EqTests[DecodeError.NotFound.type].eqv)
+  checkAll("DecodeError.NotFound", EqTests[DecodeError.NotFound].eqv)
   checkAll("DecodeError.TypeError", EqTests[DecodeError.TypeError].eqv)
   checkAll("ParseError", EqTests[ParseError].eqv)
   checkAll("ParseError.SyntaxError", EqTests[ParseError.SyntaxError].eqv)
@@ -51,10 +51,10 @@ class ErrorTests extends DisciplineSuite {
   }
 
   test("Show[DecodeError.NotFound] should yield a string containing the expected message") {
-    forAll { error: DecodeError.NotFound.type =>
+    forAll { error: DecodeError.NotFound =>
       val expected = "no matched node"
 
-      Show[DecodeError.NotFound.type].show(error) should include(expected)
+      Show[DecodeError.NotFound].show(error) should include(expected)
       Show[DecodeError].show(error) should include(expected)
       Show[ReadError].show(error) should include(expected)
       Show[XPathError].show(error) should include(expected)

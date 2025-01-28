@@ -33,7 +33,7 @@ trait ArbitraryInstances
   // -------------------------------------------------------------------------------------------------------------------
   implicit val arbCompileError: Arbitrary[CompileError]          = Arbitrary(genException.map(CompileError.apply))
   implicit val arbTypeError: Arbitrary[DecodeError.TypeError]    = Arbitrary(genException.map(DecodeError.TypeError.apply))
-  implicit val arbNotFound: Arbitrary[DecodeError.NotFound.type] = Arbitrary(Gen.const(DecodeError.NotFound))
+  implicit val arbNotFound: Arbitrary[DecodeError.NotFound] = Arbitrary(Gen.const(DecodeError.NotFound()))
   implicit val arbDecodeError: Arbitrary[DecodeError] =
     Arbitrary(Gen.oneOf(arbNotFound.arbitrary, arbTypeError.arbitrary))
   implicit val arbSyntaxError: Arbitrary[ParseError.SyntaxError] = Arbitrary(
@@ -49,11 +49,11 @@ trait ArbitraryInstances
 
   implicit val cogenCompileError: Cogen[CompileError]          = Cogen[String].contramap(_.message)
   implicit val cogenTypeError: Cogen[DecodeError.TypeError]    = Cogen[String].contramap(_.message)
-  implicit val cogenNotFound: Cogen[DecodeError.NotFound.type] = Cogen[Unit].contramap(_ => ())
+  implicit val cogenNotFound: Cogen[DecodeError.NotFound] = Cogen[Unit].contramap(_ => ())
   implicit val cogenDecodeError: Cogen[DecodeError] = Cogen { (seed: Seed, error: DecodeError) =>
     error match {
       case err: DecodeError.TypeError     => cogenTypeError.perturb(seed, err)
-      case err: DecodeError.NotFound.type => cogenNotFound.perturb(seed, err)
+      case err: DecodeError.NotFound => cogenNotFound.perturb(seed, err)
     }
   }
   implicit val cogenSyntaxError: Cogen[ParseError.SyntaxError] = Cogen[String].contramap(_.message)

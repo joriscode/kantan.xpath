@@ -26,7 +26,7 @@ package object scalaz extends DecoderInstances with CommonInstances {
   implicit val xpathCompileErrorEqual: Equal[CompileError]          = Equal.equalA
   implicit val xpathReadErrorEqual: Equal[ReadError]                = Equal.equalA
   implicit val xpathDecodeErrorEqual: Equal[DecodeError]            = Equal.equalA
-  implicit val xpathNotFoundEqual: Equal[DecodeError.NotFound.type] = Equal.equalA
+  implicit val xpathNotFoundEqual: Equal[DecodeError.NotFound] = Equal.equalA
   implicit val xpathTypeErrorEqual: Equal[DecodeError.TypeError]    = Equal.equalA
   implicit val xpathParseErrorEqual: Equal[ParseError]              = Equal.equalA
   implicit val xpathSyntaxErrorEqual: Equal[ParseError.SyntaxError] = Equal.equalA
